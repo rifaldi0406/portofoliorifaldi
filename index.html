@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Rifaldi</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      scroll-behavior: smooth;
+      transition: background 0.5s ease-in-out;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .bg-hutan {
+      background: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHp2cjJwenMza3MxeWJtNmRwaDB3ODU3bWxrYzVidmRoaTI2cWtoaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ugcss7H8FXXpe/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      z-index: 30;
+      width: 100%;
+      height: 4px;
+    }
+    
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      width: 0%;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+    }
+    
+    /* Animations */
+    .fade-in {
+      animation: fadeIn 2s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+    
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Card animations */
+    .project-card {
+      transition: transform 0.4s, background-color 0.4s, box-shadow 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-card:hover {
+      background-color: rgba(16, 185, 129, 0.2);
+      transform: scale(1.03) translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(16, 185, 129, 0.5);
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 50%, rgba(16, 185, 129, 0.1) 50%);
+      background-size: 200% 200%;
+      background-position: 0% 0%;
+      transition: background-position 0.4s ease;
+    }
+    
+    .project-card:hover::before {
+      background-position: 100% 100%;
+    }
+    
+    /* Social icons */
+    .sosial-icon {
+      transition: all 0.4s;
+      display: inline-block;
+      position: relative;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 8px;
+    }
+    
+    .sosial-icon:hover {
+      color: #10b981;
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+    
+    .sosial-icon::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 80%;
+      height: 2px;
+      background: #10b981;
+      transition: transform 0.3s;
+    }
+    
+    .sosial-icon:hover::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+    
+    /* Text effects */
+    .animate-glow {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #34d399, 0 0 20px #34d399; }
+      to { text-shadow: 0 0 20px #10b981, 0 0 30px #10b981; }
+    }
+    
+    .fire-text {
+      animation: greenFire 3s ease-in-out infinite;
+    }
+    
+    @keyframes greenFire {
+      0% {
+        text-shadow: 0 0 5px #10b981, 0 0 10px #10b981, 0 0 15px #10b981, 0 0 20px #059669;
+      }
+      50% {
+        text-shadow: 0 0 10px #059669, 0 0 20px #10b981, 0 0 30px #34d399, 0 0 40px #10b981;
+      }
+      100% {
+        text-shadow: 0 0 5px #10b981, 0 0 10px #10b981, 0 0 15px #10b981, 0 0 20px #059669;
+      }
+    }
+    
+    /* Typing animation */
+    .typing {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #10b981;
+      animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+      display: inline-block;
+      max-width: fit-content;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #10b981 }
+    }
+    
+    /* Marquee */
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: flex;
+    }
+    
+    .animate-marquee {
+      display: flex;
+      animation: marquee 12s linear infinite;
+    }
+    
+    .marquee img {
+      display: inline-block;
+      margin-right: 12rem;
+      transition: transform 0.1s ease;
+    }
+    
+    .marquee img:hover {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    /* Mobile menu styles */
+    #menu {
+      transition: all 0.5s ease-in-out;
+      overflow: hidden;
+    }
+    
+    @media (max-width: 768px) {
+      #menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        max-height: 0;
+        z-index: 20;
+      }
+      
+      #menu.show {
+        transform: translateY(0);
+        opacity: 1;
+        max-height: 300px;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      
+      #menu a {
+        display: block;
+        padding: 1rem 2rem;
+        text-align: center;
+        transform: translateX(-20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      
+      #menu.show a {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      
+      #menu.show a:nth-child(1) { transition-delay: 0.1s; }
+      #menu.show a:nth-child(2) { transition-delay: 0.2s; }
+      #menu.show a:nth-child(3) { transition-delay: 0.3s; }
+      #menu.show a:nth-child(4) { transition-delay: 0.4s; }
+    }
+    
+    .hamburger-icon, .close-icon {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .hamburger-icon:hover, .close-icon:hover {
+      transform: scale(1.1);
+      color: #10b981;
+    }
+    
+    .close-icon {
+      display: none;
+    }
+    
+    /* Skill badges */
+    .skill-badge {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      padding: 5px 12px;
+      display: inline-block;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-badge:hover {
+      background: rgba(16, 185, 129, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Custom cursor */
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #10b981;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width 0.3s, height 0.3s, background 0.3s;
+      mix-blend-mode: difference;
+    }
+    
+    .custom-cursor.grow {
+      width: 40px;
+      height: 40px;
+      background: rgba(16, 185, 129, 0.1);
+      mix-blend-mode: normal;
+    }
+    
+    /* Popup effect for projects */
+    .project-popup {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      transform: translateY(100%);
+      transition: all 0.4s ease;
+    }
+    
+    .project-card:hover .project-popup {
+      transform: translateY(0);
+    }
+    
+    /* Image styles */
+    .profile-img {
+      border: 3px solid rgba(16, 185, 129, 0.5);
+      transition: all 0.5s ease;
+      filter: grayscale(20%);
+    }
+    
+    .profile-img:hover {
+      border-color: #10b981;
+      filter: grayscale(0%) drop-shadow(0 0 15px rgba(16, 185, 129, 0.7));
+      transform: scale(1.02);
+    }
+    
+    /* Button styles */
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #059669, #10b981);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .btn-primary:hover::before {
+      left: 0;
+    }
+    
+    .btn-primary:hover {
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+      transform: translateY(-3px);
+    }
+    
+    /* Section backgrounds */
+    .section-bg {
+      position: relative;
+    }
+    
+    .section-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .snake-game-container * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Style khusus untuk game, dengan prefix snake- untuk menghindari konflik */
+    .snake-game-container {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #0d0e1212;
+      color: white;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    
+    .snake-heading {
+      color: #10b981;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    
+    .snake-game-board {
+      position: relative;
+      margin: 20px 0;
+    }
+    
+    .snake-canvas {
+      border: 3px solid #10b981;
+      border-radius: 5px;
+      background-color: #0f172a;
+    }
+    
+    .snake-score-container {
+      display: flex;
+      justify-content: space-between;
+      width: 400px;
+      margin-bottom: 10px;
+    }
+    
+    .snake-score-box {
+      background-color: rgba(16, 185, 129, 0.2);
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    
+    .snake-controls {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .snake-button {
+      background-color: #10b981;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .snake-button:hover {
+      background-color: #047857;
+    }
+    
+    .snake-game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+    
+    .snake-mobile-controls {
+      display: none;
+      margin-top: 20px;
+      width: 120px;
+      height: 120px;
+      position: relative;
+    }
+    
+    .snake-mobile-btn {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(16, 185, 129, 0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .snake-up-btn { top: 0; left: 40px; }
+    .snake-left-btn { top: 40px; left: 0; }
+    .snake-right-btn { top: 40px; left: 80px; }
+    .snake-down-btn { top: 80px; left: 40px; }
+    
+    @media (max-width: 500px) {
+      .snake-canvas {
+        width: 300px;
+        height: 300px;
+      }
+      
+      .snake-score-container {
+        width: 300px;
+      }
+      
+      .snake-mobile-controls {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="bg-hutan text-white min-h-screen" id="home">
+  <!-- Custom Cursor -->
+  <div class="custom-cursor hidden md:block"></div>
+  
+  <!-- Scroll Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="backdrop min-h-screen">
+    <!-- Navbar -->
+    <nav class="backdrop-blur-lg bg-black bg-opacity-40 fixed w-full z-20 top-0 left-0 shadow-md border-b border-green-500/20 transition duration-300">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
+        <a href="#" class="text-2xl font-extrabold text-green-400 fire-text tracking-wide flex items-center">
+          <span class="mr-2">🌿</span>Rifaldi
+        </a>
+        
+        <!-- Hamburger Menu Toggle Button -->
+        <button id="menu-btn" class="md:hidden text-gray-300 focus:outline-none" aria-label="Toggle Menu">
+          <svg class="w-8 h-8 hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg class="w-8 h-8 close-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        
+        <!-- Navigation Menu -->
+        <div id="menu"
+          class="w-full md:block md:w-auto md:flex md:space-x-8 text-lg font-medium text-white transition-all duration-500">
+          <a href="#home" class="hover:text-green-400 transition duration-200">Home</a>
+          <a href="#about" class="hover:text-green-400 transition duration-200">Tentang Saya</a>
+          <a href="#skills" class="hover:text-green-400 transition duration-200">Keahlian</a>
+          <a href="#projects" class="hover:text-green-400 transition duration-200">Proyek</a>
+          <a href="#sosial" class="hover:text-green-400 transition duration-200">Kontak</a>
+        </div>
+      </div>
+    </nav>
+   
+    <!-- Home Section -->
+    <section id="home" class="flex items-center justify-center h-screen fade-in pt-20">
+      <div class="text-center px-4 max-w-3xl mx-auto">
+        <p class="text-green-400 mb-2 tracking-wider">SELAMAT DATANG DI PORTFOLIO SAYA</p>
+        <h2 class="text-3xl md:text-6xl font-bold mb-4 typing">Halo, Saya Rifaldi</h2>
+        <p class="text-xl md:text-2xl mb-8 text-gray-300">Mahasiswa Informatika yang penuh semangat dan apa ya🙄?</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#projects" class="btn-primary inline-flex items-center">
+            <span>Lihat Proyek</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <a href="#sosial" class="border border-green-500 text-green-400 px-6 py-2 rounded-lg transition-all hover:bg-green-500 hover:text-white hover:shadow-lg hover:shadow-green-500/20 inline-flex items-center">
+            <span>Hubungi Saya</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 md:px-20 scroll-reveal section-bg">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-6xl mx-auto">
+        <!-- KIRI: Teks -->
+        <div class="md:w-1/2">
+          <div class="inline-block px-2 py-1 bg-green-500/10 text-green-400 rounded mb-2">Tentang Saya</div>
+          <h3 class="text-3xl md:text-4xl font-semibold mb-6">Siapa <span class="text-green-400">Rifaldi</span>?</h3>
+          <p class="text-lg md:text-xl leading-relaxed text-gray-300 mb-6">
+            Saya adalah Mahasiswa dari Universitas Islam Al Banjari Kalimantan Selatan, dan saya mengambil jurusan Informatika. Saya memiliki passion dalam pengembangan web dan desain UI/UX yang kreatif.
+          </p>
+          <p class="text-lg md:text-xl leading-relaxed text-gray-300 mb-8">
+            Saya selalu bersemangat untuk terus belajar teknologi baru dan mengembangkan keterampilan dalam bidang IT.
+          </p>
+          <div class="flex gap-6 mt-8">
+            <div>
+              <h4 class="text-4xl font-bold text-green-400">1/2+</h4>
+              <p class="text-gray-400">Tahun Pengalaman</p>
+            </div>
+            <div>
+              <h4 class="text-4xl font-bold text-green-400">2+</h4>
+              <p class="text-gray-400">Proyek Selesai</p>
+            </div>
+          </div>
+        </div>
+    
+        <!-- KANAN: Foto -->
+        <div class="md:w-1/2 flex flex-col items-center justify-center">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-green-500/20 rounded-full blur-lg"></div>
+            <img src="https://i.imgur.com/SEKKJt8.jpeg" alt="Foto Rifaldi"
+              class="w-72 h-72 object-cover rounded-full shadow-2xl profile-img relative z-10"
+              style="filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5));">
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold mt-6 text-green-400 fire-text animate-glow">Rifaldi</h2>
+          <p class="text-lg text-gray-300 mt-2">Web Developer & Designer</p>
+        </div>     
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 md:px-20 scroll-reveal bg-black bg-opacity-5 section-bg">
+      <div class="max-w-6xl mx-auto">
+        <div class="inline-block px-2 py-1 bg-green-500/10 text-green-400 rounded mb-2">Keahlian</div>
+        <h3 class="text-3xl md:text-4xl font-semibold mb-10">Teknologi yang <span class="text-green-400">Saya Kuasai</span></h3>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <!-- Skill Category -->
+          <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="p-3 bg-green-500/10 rounded-md mr-4">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-xl">Front-End</h4>
+            </div>
+            <div class="flex flex-wrap">
+              <span class="skill-badge">HTML</span>
+              <span class="skill-badge">CSS</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">TailwindCSS</span>
+            </div>
+          </div>
+          
+          <!-- Skill Category -->
+          <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="p-3 bg-green-500/10 rounded-md mr-4">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-xl">Back-End</h4>
+            </div>
+            <div class="flex flex-wrap">
+              <span class="skill-badge">PHP</span>
+              <span class="skill-badge">MySQL</span>
+              <span class="skill-badge">Node.js</span>
+            </div>
+          </div>
+          
+          <!-- Skill Category -->
+          <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="p-3 bg-green-500/10 rounded-md mr-4">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-xl">Design</h4>
+            </div>
+            <div class="flex flex-wrap">
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">UI/UX</span>
+              <span class="skill-badge">Adobe XD</span>
+            </div>
+          </div>
+          
+          <!-- Skill Category -->
+          <div class="bg-white bg-opacity-5 p-6 rounded-lg hover:bg-opacity-10 transition-all">
+            <div class="flex items-center mb-4">
+              <div class="p-3 bg-green-500/10 rounded-md mr-4">
+                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-xl">Tools</h4>
+            </div>
+            <div class="flex flex-wrap">
+              <span class="skill-badge">Git</span>
+              <span class="skill-badge">VS Code</span>
+              <span class="skill-badge">Vercel</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-16">
+          <h4 class="text-xl font-semibold mb-6 text-center">Teknologi yang Saya Gunakan</h4>
+          <div class="marquee mt-10 bg-white bg-opacity-5 py-6 px-4 rounded-lg">
+            <div class="animate-marquee">
+              <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" width="60" alt="HTML" class="filter brightness-125">
+              <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" width="60" alt="CSS" class="filter brightness-125">
+              <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" width="60" alt="JavaScript" class="filter brightness-125">
+              <img src="https://cdn-icons-png.flaticon.com/512/732/732073.png" width="60" alt="Tailwind" class="filter brightness-125">
+              <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" width="60" alt="React" class="filter brightness-125">
+              <img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" width="60" alt="Node.js" class="filter brightness-125">
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 md:px-20 scroll-reveal section-bg">
+      <div class="max-w-6xl mx-auto">
+        <div class="inline-block px-2 py-1 bg-green-500/10 text-green-400 rounded mb-2">Portofolio</div>
+        <h3 class="text-3xl md:text-4xl font-semibold mb-10">Proyek <span class="text-green-400">Terbaru</span></h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project Card 1 -->
+          <div class="project-card bg-white bg-opacity-5 overflow-hidden rounded-xl max-w-md">
+            <div class="relative h-48 overflow-hidden">
+              <img src="https://i.imgur.com/K57TYMB.png" alt="Project Image" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+              <div class="absolute bottom-0 left-0 p-4">
+                <h4 class="text-xl font-bold text-white">Website Pthree</h4>
+                <p class="text-green-400">Frontend & Back-End Development</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-300 mb-4">Website Komunitas baca dari SMAN 2 MUARA TEWEH.</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="text-xs bg-green-400 bg-opacity-20 text-green-400 px-2 py-1 rounded">HTML</span>
+                <span class="text-xs bg-green-400 bg-opacity-20 text-green-400 px-2 py-1 rounded">CSS</span>
+                <span class="text-xs bg-green-400 bg-opacity-20 text-green-400 px-2 py-1 rounded">JavaScript</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <a href="https://pthreesmada.vercel.app/" target="_blank" class="card-link text-green-400 hover:text-green-500 transition flex items-center">
+                  <span>Detail</span>
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </a>
+                <a href="https://pthreesmada.vercel.app/" target="_blank" class="card-link text-white opacity-70 hover:text-white transition">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Project Card 2 -->
+                <div class="project-card bg-white bg-opacity-5 overflow-hidden rounded-xl max-w-md">
+                  <div class="relative h-48 overflow-hidden">
+                    <img src="https://i.imgur.com/5vAkhCN.png" alt="Project Image" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 p-4">
+                      <h4 class="text-xl font-bold text-white">MY GITHUB PROJECT SCRIPT JOB</h4>
+                      <p class="text-green-400">SCRIPT FIVEM JOB</p>
+                    </div>
+                  </div>
+                  <div class="p-6">
+                    <p class="text-gray-300 mb-4">MY GITHUB.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      <span class="text-xs bg-green-400 bg-opacity-20 text-green-400 px-2 py-1 rounded">Roleplay</span>
+                      <span class="text-xs bg-green-400 bg-opacity-20 text-green-400 px-2 py-1 rounded">JOB</span>
+                      <span class="text-xs bg-green-400 bg-opacity-20 text-green-400 px-2 py-1 rounded">SCRIPT</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <a href="https://github.com/rifaldi0406/script_truker_faldi" target="_blank" class="card-link text-green-400 hover:text-green-500 transition flex items-center">
+                        <span>Detail</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </a>
+                      <a href="https://github.com/rifaldi0406/script_truker_faldi" target="_blank" class="card-link text-white opacity-70 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+          
+          <!-- Project Card 3 -->
+      
+    </section>
+  </head>
+  <body>
+    <div class="snake-game-container">
+      <h1 class="snake-heading">Game Ular - Buat kalian main 😁</h1>
+      <div class="snake-score-container">
+        <div class="snake-score-box">Skor: <span id="snake-score">0</span></div>
+        <div class="snake-score-box">Skor Tertinggi: <span id="snake-high-score">0</span></div>
+      </div>
+      
+      <div class="snake-game-board">
+        <canvas id="snake-canvas" class="snake-canvas" width="400" height="400"></canvas>
+        <div id="snake-game-over" class="snake-game-over">
+          <h2>Game Over!</h2>
+          <p>Skor Akhir: <span id="snake-final-score">0</span></p>
+          <button id="snake-restart-btn" class="snake-button">Main Lagi</button>
+        </div>
+      </div>
+      
+      <div class="snake-controls">
+        <button id="snake-start-btn" class="snake-button">Mulai Game</button>
+        <button id="snake-pause-btn" class="snake-button">Jeda</button>
+      </div>
+      
+      <div id="snake-mobile-controls" class="snake-mobile-controls">
+        <div class="snake-mobile-btn snake-up-btn" id="snake-up-btn">↑</div>
+        <div class="snake-mobile-btn snake-left-btn" id="snake-left-btn">←</div>
+        <div class="snake-mobile-btn snake-right-btn" id="snake-right-btn">→</div>
+        <div class="snake-mobile-btn snake-down-btn" id="snake-down-btn">↓</div>
+      </div>
+    </div>
+  
+
+    <!-- Social Section -->
+    <section id="sosial" class="py-20 px-6 md:px-50 scroll-reveal bg-black bg-opacity-5 section-bg">
+      <div class="max-w-6xl mx-auto text-center">
+        <div class="inline-block px-2 py-1 bg-green-500/10 text-green-400 rounded mb-2">Kontak</div>
+        <h3 class="text-3xl md:text-4xl font-semibold mb-6">Mari <span class="text-green-400">Terhubung</span></h3>
+        <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+          Jangan ragu untuk menghubungi saya melalui email atau media sosial di bawah ini.
+          Saya akan senang berkolaborasi dalam proyek-proyek menarik!
+        </p>
+        
+        <div class="flex justify-center space-x-6 mb-12">
+          <a href="https://github.com/rifaldi0406" class="sosial-icon">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.699 1.028 1.592 1.028 2.683 0 3.841-2.337 4.687-4.565 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/rifaldi.ferdi.96" class="sosial-icon">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z" />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/ferdy406_/" class="sosial-icon">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+            </svg>
+          </a>
+          <a href="#" class="sosial-icon">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
+          </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-10 px-6 md:px-20 bg-black bg-opacity-10 border-t border-green-500/20">
+      <div class="max-w-6xl mx-auto text-center">
+        <a href="#" class="inline-block text-2xl font-extrabold text-green-400 fire-text tracking-wide mb-6">
+          <span class="mr-2">🌿</span>Rifaldi
+        </a>
+        <p class="text-gray-400 mb-6">Web Developer & UI/UX Designer.Masih belajar sih😁</p>
+        <p class="text-gray-500 text-sm">© 2025 Rifaldi.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Progress bar
+    window.onscroll = function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+      
+      // Scroll reveal animation
+      const reveals = document.querySelectorAll('.scroll-reveal');
+      
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("revealed");
+        }
+      }
+    };
+    
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+    const hamburger = document.querySelector('.hamburger-icon');
+    const closeIcon = document.querySelector('.close-icon');
+    
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('show');
+      hamburger.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('#menu a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('show');
+        hamburger.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+    
+    // Custom cursor
+    const cursor = document.querySelector('.custom-cursor');
+    
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    
+    document.addEventListener('mousedown', () => {
+      cursor.classList.add('grow');
+    });
+    
+    document.addEventListener('mouseup', () => {
+      cursor.classList.remove('grow');
+    });
+    
+    // Handle hover effects for cursor
+    const allLinks = document.querySelectorAll('a, button');
+    
+    allLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        cursor.classList.add('grow');
+      });
+      
+      link.addEventListener('mouseleave', () => {
+        cursor.classList.remove('grow');
+      });
+    });
+    // This script ensures links are clickable
+  document.querySelectorAll('.card-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      // This is just a backup to the natural link behavior
+      window.open(link.getAttribute('href'), '_blank');
+    });
+  });
+// Immediately invoked function expression untuk mengisolasi scope variabel
+(function() {
+    // Menunggu DOM sepenuhnya dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      // Setup Canvas
+      const canvas = document.getElementById('snake-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Game variables
+      const gridSize = 20;
+      const tileCount = canvas.width / gridSize;
+      let snake = [];
+      let food = {};
+      let dx = gridSize;
+      let dy = 0;
+      let score = 0;
+      let highScore = localStorage.getItem('snakeHighScore') || 0;
+      let gameInterval;
+      let isPaused = false;
+      let gameSpeed = 150; // milliseconds
+      let gameStarted = false;
+
+      // DOM elements dengan prefix snake- untuk menghindari konflik
+      const scoreEl = document.getElementById('snake-score');
+      const highScoreEl = document.getElementById('snake-high-score');
+      const finalScoreEl = document.getElementById('snake-final-score');
+      const gameOverEl = document.getElementById('snake-game-over');
+      const startBtn = document.getElementById('snake-start-btn');
+      const pauseBtn = document.getElementById('snake-pause-btn');
+      const restartBtn = document.getElementById('snake-restart-btn');
+      
+      // Update high score display
+      highScoreEl.textContent = highScore;
+
+      // Initialize game
+      function initGame() {
+        clearInterval(gameInterval);
+        snake = [
+          { x: 5 * gridSize, y: 10 * gridSize },
+          { x: 4 * gridSize, y: 10 * gridSize },
+          { x: 3 * gridSize, y: 10 * gridSize }
+        ];
+        
+        dx = gridSize;
+        dy = 0;
+        score = 0;
+        scoreEl.textContent = score;
+        generateFood();
+        drawEverything();
+      }
+
+      // Generate random food position
+      function generateFood() {
+        food.x = Math.floor(Math.random() * tileCount) * gridSize;
+        food.y = Math.floor(Math.random() * tileCount) * gridSize;
+        
+        // Make sure food doesn't spawn on snake
+        for (let i = 0; i < snake.length; i++) {
+          if (food.x === snake[i].x && food.y === snake[i].y) {
+            generateFood();
+            return;
+          }
+        }
+      }
+
+      // Game loop
+      function gameLoop() {
+        if (isPaused) return;
+        
+        // Move snake
+        const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+        snake.unshift(head);
+        
+        // Check if game over
+        if (isGameOver()) {
+          clearInterval(gameInterval);
+          gameStarted = false;
+          
+          // Update high score if needed
+          if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('snakeHighScore', highScore);
+            highScoreEl.textContent = highScore;
+          }
+          
+          finalScoreEl.textContent = score;
+          gameOverEl.style.display = 'block';
+          return;
+        }
+        
+        // Check if food eaten
+        if (head.x === food.x && head.y === food.y) {
+          score++;
+          scoreEl.textContent = score;
+          generateFood();
+          
+          // Increase speed slightly every 5 points
+          if (score % 5 === 0 && gameSpeed > 50) {
+            gameSpeed -= 10;
+            clearInterval(gameInterval);
+            gameInterval = setInterval(gameLoop, gameSpeed);
+          }
+        } else {
+          snake.pop();
+        }
+        
+        drawEverything();
+      }
+
+      // Draw everything
+      function drawEverything() {
+        // Clear canvas
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw snake
+        for (let i = 0; i < snake.length; i++) {
+          // Gradient colors for snake body
+          if (i === 0) {
+            // Snake head
+            ctx.fillStyle = '#10b981';
+          } else {
+            // Snake body with gradient
+            const greenValue = 185 - (i * 5);
+            ctx.fillStyle = `rgb(16, ${Math.max(greenValue, 100)}, 129)`;
+          }
+          
+          ctx.fillRect(snake[i].x, snake[i].y, gridSize - 1, gridSize - 1);
+          
+          // Add eyes to head
+          if (i === 0) {
+            ctx.fillStyle = 'white';
+            // Position eyes based on direction
+            if (dx === gridSize) { // Right
+              ctx.fillRect(snake[i].x + gridSize - 7, snake[i].y + 5, 3, 3);
+              ctx.fillRect(snake[i].x + gridSize - 7, snake[i].y + gridSize - 8, 3, 3);
+            } else if (dx === -gridSize) { // Left
+              ctx.fillRect(snake[i].x + 4, snake[i].y + 5, 3, 3);
+              ctx.fillRect(snake[i].x + 4, snake[i].y + gridSize - 8, 3, 3);
+            } else if (dy === gridSize) { // Down
+              ctx.fillRect(snake[i].x + 5, snake[i].y + gridSize - 7, 3, 3);
+              ctx.fillRect(snake[i].x + gridSize - 8, snake[i].y + gridSize - 7, 3, 3);
+            } else { // Up
+              ctx.fillRect(snake[i].x + 5, snake[i].y + 4, 3, 3);
+              ctx.fillRect(snake[i].x + gridSize - 8, snake[i].y + 4, 3, 3);
+            }
+          }
+        }
+        
+        // Draw food with pulsing animation
+        const pulseSize = 1 + Math.sin(Date.now() / 200) * 0.1;
+        const foodSize = gridSize * pulseSize;
+        const foodOffset = (foodSize - gridSize) / 2;
+        
+        ctx.fillStyle = '#ef4444'; // Red color
+        ctx.beginPath();
+        ctx.arc(
+          food.x + gridSize / 2, 
+          food.y + gridSize / 2, 
+          foodSize / 2, 
+          0, 
+          Math.PI * 2
+        );
+        ctx.fill();
+        
+        // Add sparkle to food
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(
+          food.x + gridSize / 3, 
+          food.y + gridSize / 3, 
+          2, 
+          0, 
+          Math.PI * 2
+        );
+        ctx.fill();
+        
+        // Draw grid lines (subtle)
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.lineWidth = 0.5;
+        
+        for (let i = 0; i <= canvas.width; i += gridSize) {
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i, canvas.height);
+          ctx.stroke();
+          
+          ctx.beginPath();
+          ctx.moveTo(0, i);
+          ctx.lineTo(canvas.width, i);
+          ctx.stroke();
+        }
+      }
+
+      // Check for game over
+      function isGameOver() {
+        // Wall collision
+        if (
+          snake[0].x < 0 ||
+          snake[0].x >= canvas.width ||
+          snake[0].y < 0 ||
+          snake[0].y >= canvas.height
+        ) {
+          return true;
+        }
+        
+        // Self collision (start checking from 4th segment)
+        for (let i = 4; i < snake.length; i++) {
+          if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+            return true;
+          }
+        }
+        
+        return false;
+      }
+
+      // Event listener hanya untuk tombol snake game
+      function setupKeyboardControls() {
+        const keyHandler = function(e) {
+          // Jika game tidak dimulai, mulai pada tombol panah
+          if (!gameStarted && (e.key.includes('Arrow') || ['w', 'a', 's', 'd'].includes(e.key.toLowerCase()))) {
+            startGame();
+          }
+          
+          // Prevent default action for arrow keys
+          if (e.key.includes('Arrow') || ['w', 'a', 's', 'd'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+          }
+          
+          // Change direction
+          changeDirection(e.key);
+        };
+        
+        // Add event listener with focus check
+        document.addEventListener('keydown', function(e) {
+          // Only process keyboard events if the game container is in view
+          const gameContainer = document.querySelector('.snake-game-container');
+          const rect = gameContainer.getBoundingClientRect();
+          
+          // Check if game is visible in viewport
+          if (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          ) {
+            keyHandler(e);
+          }
+        });
+      }
+      
+      // Setup keyboard controls
+      setupKeyboardControls();
+      
+      // Touch controls for mobile
+      document.getElementById('snake-up-btn').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameStarted) startGame();
+        changeDirection('ArrowUp');
+      });
+      
+      document.getElementById('snake-down-btn').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameStarted) startGame();
+        changeDirection('ArrowDown');
+      });
+      
+      document.getElementById('snake-left-btn').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameStarted) startGame();
+        changeDirection('ArrowLeft');
+      });
+      
+      document.getElementById('snake-right-btn').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameStarted) startGame();
+        changeDirection('ArrowRight');
+      });
+      
+      // Start button
+      startBtn.addEventListener('click', startGame);
+      
+      // Restart button
+      restartBtn.addEventListener('click', () => {
+        gameOverEl.style.display = 'none';
+        initGame();
+        startGame();
+      });
+      
+      // Pause button
+      pauseBtn.addEventListener('click', () => {
+        if (!gameStarted) return;
+        
+        isPaused = !isPaused;
+        pauseBtn.textContent = isPaused ? 'Lanjutkan' : 'Jeda';
+      });
+      
+      // Change direction function
+      function changeDirection(key) {
+        if (isPaused) return;
+        
+        const keyLower = key.toLowerCase();
+        
+        // Prevent reversing into self
+        if ((key === 'ArrowUp' || keyLower === 'w') && dy === 0) {
+          dx = 0;
+          dy = -gridSize;
+        } else if ((key === 'ArrowDown' || keyLower === 's') && dy === 0) {
+          dx = 0;
+          dy = gridSize;
+        } else if ((key === 'ArrowLeft' || keyLower === 'a') && dx === 0) {
+          dx = -gridSize;
+          dy = 0;
+        } else if ((key === 'ArrowRight' || keyLower === 'd') && dx === 0) {
+          dx = gridSize;
+          dy = 0;
+        }
+      }
+      
+      // Start game function
+      function startGame() {
+        if (gameStarted) return;
+        
+        gameStarted = true;
+        isPaused = false;
+        pauseBtn.textContent = 'Jeda';
+        gameSpeed = 150;
+        gameOverEl.style.display = 'none';
+        gameInterval = setInterval(gameLoop, gameSpeed);
+      }
+      
+      // Initialize game on load
+      initGame();
+      
+      // Draw initial state
+      drawEverything();
+    });
+  })(); // Tutup IIFE untuk me
+
+  </script>
+</body>
+</html>
